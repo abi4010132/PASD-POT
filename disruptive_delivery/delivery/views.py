@@ -22,8 +22,6 @@ def offer_delivery(date, time, price, id):
     r = requests.post(
         'https://pasd-webshop-api.onrender.com/api/delivery/', headers=h, json=body)
 
-    print(r)
-
     try:
         return (JsonResponse(r.json(), status=r.status_code))
     except ValueError:
@@ -51,7 +49,6 @@ def render_offer(request):
         elif order['last_delivery']['status'] == 'REJ':
             filtered_orders.append((order['id'], order['id']))
     if request.method == 'POST':
-        print('hier')
         form = OrderOfferFormID(request.POST)
         form.fields['id'].choices = filtered_orders
         if form.is_valid():
@@ -60,7 +57,6 @@ def render_offer(request):
             price = form.cleaned_data['price']
             id = form.cleaned_data['id']
             response = offer_delivery(date, time, price, id)
-            print(response.status_code)
             if response.status_code == 400:
                 content = json.loads(response.content)
                 messages.error(request, content['detail'])
@@ -101,8 +97,7 @@ def get_orders(request):
             filtered_orders.append(order)
         elif order['last_delivery']['status'] == 'REJ':
             filtered_orders.append(order)
-    print(type(filtered_orders))
-    print(filtered_orders)
+
     if request.method == 'POST':
         form = OrderOfferForm(request.POST)
         if form.is_valid():
@@ -111,7 +106,6 @@ def get_orders(request):
             price = form.cleaned_data['price']
             id = request.POST.get('order_id')
             response = offer_delivery(date, time, price, id)
-            print(response.status_code)
             if response.status_code == 400:
                 content = json.loads(response.content)
                 messages.error(request, content['detail'])
@@ -143,7 +137,6 @@ def get_delivery_by_id(id):
     }
     r = requests.get(
         f'https://pasd-webshop-api.onrender.com/api/delivery/{id}', headers=h)
-    print(r.text)
 
     return JsonResponse(r.json(), status=r.status_code)
 
@@ -168,8 +161,6 @@ def render_delivery(request):
                 messages.error(
                     request, 'Internal server error, please try again later.')
             elif response.status_code == 200:
-                print(json.loads(response.content))
-                print(type(json.loads(response.content)))
                 delivery = json.loads(response.content)
     else:
         form = GetDeliveryForm()
@@ -183,7 +174,6 @@ def render_update_delivery(request):
     }
     r = requests.get(
         'https://pasd-webshop-api.onrender.com/api/order/', headers=h)
-    print(r.status_code)
 
     try:
         orders = r.json()
@@ -207,7 +197,6 @@ def render_update_delivery(request):
             date = form.cleaned_data['date']
             time = form.cleaned_data['time']
             response = update_delivery(id, status, date, time)
-            print(response.status_code)
             if response.status_code == 400:
                 content = json.loads(response.content)
                 messages.error(request, content['detail'])
@@ -265,7 +254,6 @@ def render_post_label(request):
     }
     r = requests.get(
         'https://pasd-webshop-api.onrender.com/api/order/', headers=h)
-    print(r.status_code)
 
     try:
         orders = r.json()
@@ -286,7 +274,6 @@ def render_post_label(request):
             label = request.FILES['label']
             id = form.cleaned_data['id']
             response = post_label(id, label)
-            print(response.content)
             if response.status_code == 200:
                 messages.success(request, 'Successfully uploaded the label')
             elif response.status_code == 422:
@@ -312,7 +299,6 @@ def get_deliveries(request):
     }
     r = requests.get(
         'https://pasd-webshop-api.onrender.com/api/order/', headers=h)
-    print(r.status_code)
 
     try:
         orders = r.json()
@@ -332,7 +318,6 @@ def get_deliveries(request):
 
     if request.method == 'POST':
         if 'update' in request.POST:
-            print('hier')
             form = UpdateDeliveryFormNoID(request.POST, prefix = 'update')
             if form.is_valid():
                 status = form.cleaned_data['status']
@@ -340,7 +325,6 @@ def get_deliveries(request):
                 date = form.cleaned_data['date']
                 time = form.cleaned_data['time']
                 response = update_delivery(id, status, date, time)
-                print(response.status_code)
                 if response.status_code == 400:
                     content = json.loads(response.content)
                     messages.error(request, content['detail'])
@@ -355,14 +339,11 @@ def get_deliveries(request):
                 elif response.status_code == 200:
                     messages.success(request, 'Successfully updated')
         elif 'label_id' in request.POST:
-            print('daar')
             label_form = UpLoadLabelFormNoID(request.POST, request.FILES, prefix = 'label')
             if label_form.is_valid():
                 label = request.FILES['label-label']
                 id = request.POST.get('label_id')
-                print('hoi')
                 response = post_label(id, label)
-                print(response.content)
                 if response.status_code == 200:
                     messages.success(request, 'Successfully uploaded the label')
                 elif response.status_code == 422:
@@ -374,8 +355,6 @@ def get_deliveries(request):
                         request, 'Internal server error, please try again later.')
                 elif response.status_code == 400:
                     messages.error(request, 'Delivery already has a label.')
-            else:
-                print('hoi')
 
         return redirect('deliveries')
     else:
