@@ -4,7 +4,7 @@
 ## Installation 
 Create a new folder where u will store this project in.\
 Then, we recommend to use a virtual environment to install the required packages.\
-If you don't want to use a virtual environment skip to [No virtual environment](###no-virtual-environment).
+If you don't want to use a virtual environment skip to [No virtual environment](#no-virtual-environment).
 
 ### Virtual environment
 You can install pipenv by running the following line in your terminal.
