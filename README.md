@@ -1,7 +1,7 @@
 # Problem Analysis and Software Design Proof of Technology Group 19
 #### Emmanouil Kalostypis, Antonis Charalambous & Abi Raveenthiran
 
-## Installation instructions
+## Installation 
 Create a new folder where u will store this project in.
 Then, we recommend to use a virtual environment to install the required packages.
 If you don't want to use a virtual environment skip to No virtual environment.
