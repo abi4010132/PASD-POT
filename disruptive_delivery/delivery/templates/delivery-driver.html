@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.card-row{
+    width: 18rem;
+    margin: 2rem;
+}
+</style>
+
+<script>
+function showDT(){
+    if(document.getElementById('id_status').value == 'DEL'){
+        document.getElementById('datediv').style.display = 'block';
+        document.getElementById('timediv').style.display = 'block';
+    }
+    else{
+        document.getElementById('datediv').style.display = 'none';
+        document.getElementById('timediv').style.display = 'none';
+    }
+}
+$(document).ready(function() {
+    showDT()
+})
+</script>
+<h1 style="margin-top: 2rem"class='text-center'> Disruptive Delivery </h1>
+    {% block alerts %}
+    {% endblock %}
+        {% for message in messages %}
+                <div style="margin-top:5%"class="container">
+                    <div style="margin:auto " class="col-10">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            <p>{{ message }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </divclass=>
+        {% endfor %}
+
+    <div style="margin-left:9.3%; margin-top:9%"class="row">
+        <div class="card card-row">
+            <div class="card-body">
+              <h5 class="card-title">Upload Label</h5>
+              <p class="card-text">Upload a label for a delivery</p>
+              <a href="{% url 'label' %}" class="btn btn-primary">Go</a>
+            </div>
+    </div>
+        <div class="card card-row">
+            <div class="card-body">
+              <h5 class="card-title">Deliveries</h5>
+              <p class="card-text">Get all deliveries</p>
+              <a href="{% url 'deliveries' %}" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+        <div class="card card-row">
+            <div class="card-body">
+              <h5 class="card-title">Get Delivery</h5>
+              <p class="card-text">Get a delivery</p>
+              <a href="{% url 'delivery' %}" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+        <div class="card card-row">
+            <div class="card-body">
+              <h5 class="card-title">Update Delivery</h5>
+              <p class="card-text">Update a delivery</p>
+              <a href="{% url 'update_delivery' %}" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

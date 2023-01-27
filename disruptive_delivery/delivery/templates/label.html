@@ -1,0 +1,55 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.card{
+    position:absolute;
+    top:25%;
+}
+body,
+html {
+  height: 100%;
+}
+</style>
+{% block alerts %}
+{% endblock %}
+    {% for message in messages %}
+            <div style="margin-top:5%; width:80%"class="container">
+                <div style="margin:auto " class="col-10">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        <p>{{ message }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </divclass=>
+    {% endfor %}
+    <div class = 'card' style="width:50%; left:25%;">
+        <div class = 'card-body'>
+            <h1 class="text-center card-title">Upload Label</h1>
+        <form method="POST" action="/delivery/label/"  enctype="multipart/form-data">
+            {% csrf_token %}
+            <div  style="margin-top:1rem" >
+                {{ form.non_field_errors }}
+                <div>
+                    {{ form.id.errors }}
+                    <label class='form-label fw-bold'for="{{ form.id.id_for_label }}"> Delivery ID </label>
+                    {{ form.id }}
+                </div>
+                <div style="margin-top:1rem">
+                    {{ form.label.errors }}
+                    <label class='form-label fw-bold'for="{{ form.label.id_for_label }}"> Label (.pdf) </label>
+                    {{ form.label }}
+                </div>
+            </div>
+            <div style = "margin-top:1rem" class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn-primary btn" type="submit"> Upload Label </button>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+<div>
+{% endblock %}

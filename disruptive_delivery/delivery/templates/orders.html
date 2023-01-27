@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load countries %}
+
+{% block content %}
+
+<style>
+.details{
+    margin-left: 5rem;
+}
+.details-right{
+    margin-right:3rem;
+    float:right;
+    text-align:left;
+}
+
+.collapse-icon { 
+    color:black;
+}
+
+
+table {
+    border-collapse: collapse;
+}
+
+tr.info{
+    border-bottom-color: transparent;
+}
+</style>
+<script>
+    function collapse(){
+        console.log('collapse')
+    }
+    $(document).ready(function() {
+        var d = new Date();
+          $('[id^=collapse').on('shown.bs.collapse', function () {
+            this.scrollIntoView({
+                    behavior: 'auto',
+                    block: 'center',
+                    inline: 'center'
+                });
+         });
+    })
+
+</script>
+    <h1 style='margin: 2rem 0 2rem 0' class='text-center'> All Orders </h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Order ID</th>
+            <th scope="col">Send date</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Dimensions (mm) </th>
+            <th scope="col">Breakable</th>
+            <th scope="col">Perishable</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in deliveries.orders %}
+            <tr class='info'>
+                <th scope="row"> {{order.id}} </th>
+                <td style='border-bottom-color: white'> {{order.send_date}} </td>
+                <td> 
+                    {% get_country order.sender_info.country as sender_country %}
+                    {{order.sender_info.city}}, {{sender_country.name}} 
+                </td>
+                <td> 
+                    {% get_country order.receiver_info.country as receiver_country %}
+                    {{order.receiver_info.city}}, {{receiver_country.name}} 
+                </td>
+                <td> {{order.x_in_mm}} x {{order.y_in_mm}} x {{order.z_in_mm}} </td>
+                <td> {{order.is_breakable|yesno:"Yes, No"}} </td>
+                <td> {{order.is_perishable|yesno:"Yes, No"}} </td>
+                <td> 
+                    <a class = 'collapse-icon'data-bs-toggle="collapse" href="#collapse{{forloop.counter}}" 
+                        role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i class = 'collapse-icon' data-feather="chevron-down"></i>        
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="100%">
+                    <div class='collapse' id='collapse{{forloop.counter}}'>
+                        <div class="card card-row card-collapse">
+                            <div class="card-body">
+                            <h2 class="card-title text-center">Details Order: {{order.id}} </h2>
+                            <div class = "row">
+                                <div class = "col">
+                                    <ul class="list-group">
+                                        <li class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Sender information</h5>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">Name</div>
+                                                {{order.sender_info.name}}
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">Country</div>
+                                                {% get_country order.sender_info.country as sender_country %}
+                                                {{sender_country.name}}
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">City</div>
+                                                {{order.sender_info.city}}
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">ZIP Code</div>
+                                                {{order.sender_info.zipcode}}
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">Address</div>
+                                                {{order.sender_info.street_and_number}}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class = "col">
+                                    <ul class="list-group">
+                                        <li class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Receiver information</h5>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">Name</div>
+                                                {{order.receiver_info.name}}
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">Country</div>
+                                                {% get_country order.receiver_info.country as receiver_country %}
+                                                {{receiver_country.name}}
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">City</div>
+                                                {{order.receiver_info.city}}
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">ZIP Code</div>
+                                                {{order.receiver_info.zipcode}}
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">Address</div>
+                                                {{order.receiver_info.street_and_number}}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <form method="POST" action="/orders/" >
+                                {% csrf_token %}
+                                <div  style="margin-top:1rem" class = 'form-control'>
+                                    {{ form.non_field_errors }}
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ form.date.errors }}
+                                            <label class='form-label fw-bold'for="{{ form.date.id_for_label }}"> Date </label>
+                                            {{ form.date }}
+                                        </div>
+                                        <div class="col">
+                                            {{ form.time.errors }}
+                                            <label class='form-label fw-bold'for="{{ form.time.id_for_label }}"> Time </label>
+                                            {{ form.time }}
+                                        </div>           
+                                    </div>
+                                    <div>    
+                                        {{ form.price.errors }}
+                                        <label class='form-label fw-bold'for="{{ form.price.id_for_label }}"> Price</label>
+                                        {{ form.price }}
+                                    </div>
+                                </div>
+                                <div style = "margin-top:1rem" class="d-grid gap-2 col-6 mx-auto">
+                                    <button class="btn-primary btn" type="submit" name="order_id" value={{order.id}}> Place Offer </button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block scripts %}
+    {% comment %} <script src="/static/js/deliveries.js"> </scripts> {% endcomment %}
+{% endblock %}

@@ -1,0 +1,78 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.card{
+    position:absolute;
+    top:25%;
+}
+body,
+html {
+  height: 100%;
+}
+</style>
+<script>
+    function showDT(){
+        if(document.getElementById('id_status').value == 'DEL'){
+            document.getElementById('datediv').style.display = 'block';
+            document.getElementById('timediv').style.display = 'block';
+        }
+        else{
+            document.getElementById('datediv').style.display = 'none';
+            document.getElementById('timediv').style.display = 'none';
+        }
+    }
+    $(document).ready(function() {
+        showDT()
+    })
+    </script>
+{% block alerts %}
+{% endblock %}
+    {% for message in messages %}
+            <div style="margin-top:5%; width:80%"class="container">
+                <div style="margin:auto " class="col-10">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        <p>{{ message }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </divclass=>
+    {% endfor %}
+<div class = 'card' style="width:50%; left:25%;">
+    <div class="card-body">
+        <h1 class="text-center card-title">Update Delivery</h1>
+        <p class="card-text"> 
+          <form method="POST" action="" >
+              {% csrf_token %}
+              {{ form.non_field_errors }}
+              <div>
+                  {{ form.id.errors }}
+                  <label class='form-label fw-bold'for="{{ form.id.id_for_label }}"> Delivery ID </label>
+                  {{ form.id }}
+              </div>
+              <div class="form-group">
+                  {{ form.status.errors }}
+                  <label class='form-label fw-bold'for="{{ form.status.id_for_label }}"> Status</label>
+                  {{ form.status }}
+              </div>
+              <div id = 'datediv'>
+                  {{ form.date.errors }}
+                  <label class='form-label fw-bold'for="{{ form.date.id_for_label }}"> Date </label>
+                  {{ form.date }}
+              </div>
+              <div id = 'timediv'>
+                  {{ form.time.errors }}
+                  <label class='form-label fw-bold'for="{{ form.time.id_for_label }}"> Time </label>
+                  {{ form.time }}
+              </div>           
+              <div style = "margin-top:1rem" class="d-grid gap-4 col mx-auto">
+                  <button class="btn-primary btn" type="submit" name="order_id"> Update Delivery </button>
+              </div>
+          </form>
+      </p>
+      </div>
+<div>
+{% endblock %}

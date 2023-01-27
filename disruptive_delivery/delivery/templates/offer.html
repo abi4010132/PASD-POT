@@ -1,0 +1,65 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.card{
+    position:absolute;
+    top:25%;
+}
+body,
+html {
+  height: 100%;
+}
+</style>
+{% block alerts %}
+{% endblock %}
+    {% for message in messages %}
+            <div style="margin-top:5%; width:80%"class="container">
+                <div style="margin:auto " class="col-10">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        <p>{{ message }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </divclass=>
+    {% endfor %}
+<div class = 'card' style="width:50%; left:25%; ">
+    <div class = 'card-body'>
+        <h1 class="text-center card-title">Offer on order</h1>
+        <form method="POST" action="/orders/offer/" >
+            {% csrf_token %}
+            <div  style="margin-top:1rem" >
+                {{ form.non_field_errors }}
+                <div class = 'form-group'>
+                    {{ form.id.errors }}
+                    <label class='form-label fw-bold'for="{{ form.id.id_for_label }}"> Order ID </label>
+                    {{ form.id }}
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form.date.errors }}
+                        <label class='form-label fw-bold'for="{{ form.date.id_for_label }}"> Date </label>
+                        {{ form.date }}
+                    </div>
+                    <div class="col">
+                        {{ form.time.errors }}
+                        <label class='form-label fw-bold'for="{{ form.time.id_for_label }}"> Time </label>
+                        {{ form.time }}
+                    </div>           
+                </div>
+                <div>    
+                    {{ form.price.errors }}
+                    <label class='form-label fw-bold'for="{{ form.price.id_for_label }}"> Price</label>
+                    {{ form.price }}
+                </div>
+            </div>
+            <div style = "margin-top:1rem" class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn-primary btn" type="submit" name="order_id" value={{order.id}}> Place Offer </button>
+            </div>
+        </form>
+    </div>
+<div>
+{% endblock %}
