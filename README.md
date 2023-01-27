@@ -6,7 +6,7 @@ Create a new folder where u will store this project in.
 Then, we recommend to use a virtual environment to install the required packages.
 If you don't want to use a virtual environment skip to No virtual environment.
 
-### Virtual environment
+#### Virtual environment
 You can install pipenv by running the following line in your terminal.
 ```python
 pip install --user pipenv
@@ -27,7 +27,7 @@ Now to install the required packages, enter the following line in the terminal:
 pipenv install -r requirements.txt
 ```
 
-### No virtual environment
+#### No virtual environment
 Download and unzip this whole git repository in to your folder
 Navigate to the folder you created in the terminal and enter the following line:
 ```python
