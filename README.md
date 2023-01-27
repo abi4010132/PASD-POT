@@ -7,7 +7,7 @@ Then, we recommend to use a virtual environment to install the required packages
 If you don't want to use a virtual environment skip to [No virtual environment](#no-virtual-environment).
 
 ### Virtual environment
-You can install pipenv by running the following line in your terminal.
+If you don't have pipenv installed yet, you can install it by running the following line in your terminal.
 ```python
 pip install --user pipenv
 ```
