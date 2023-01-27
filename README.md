@@ -1,5 +1,5 @@
 # Problem Analysis and Software Design Proof of Technology
-#### Group 19
+This is the proof of technology for the minimum viable product of group 19
 #### Emmanouil Kalostypis, Antonis Charalambous & Abi Raveenthiran
 
 ## Installation 
