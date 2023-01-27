@@ -41,5 +41,5 @@ Then enter the following line in the terminal to run the server:
 python manage.py runserver
 ```
 
-Now you can access the web app in your browser with the link given in the terminal:
-Which should be http://localhost:8000
+Now you can access the web app in your browser with the link given in the terminal: \n
+Which should be at http://localhost:8000
