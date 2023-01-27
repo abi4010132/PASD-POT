@@ -33,7 +33,8 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-In the terminal, navigate to the disruptive_delivery folder, which should be in the root of the folder that you just created.\
+In the terminal, navigate to the disruptive_delivery folder, where the manage.py file is.\
+This folder should be in the root of the PASD-POT-main folder.\
 Then enter the following line in the terminal to run the server:
 ```python
 python manage.py runserver
