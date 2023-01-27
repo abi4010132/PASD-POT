@@ -2,7 +2,7 @@
 #### Emmanouil Kalostypis, Antonis Charalambous & Abi Raveenthiran
 
 ## Installation 
-Create a new folder where u will store this project in.\
+Download and unzip the main branch of this repository.\
 Then, we recommend to use a virtual environment to install the required packages.\
 If you don't want to use a virtual environment skip to [No virtual environment](#no-virtual-environment).
 
@@ -11,13 +11,12 @@ If you don't have pipenv installed yet, you can install it by running the follow
 ```python
 pip install --user pipenv
 ```
-Once you've successfully installed pipenv, navigate to the new folder you just created in the terminal.\
+Once you've successfully installed pipenv,  in the terminal, navigate to the PASD-POT-main folder you just unzipped.\
 Now you can create a virtual environment by entering the following line in the terminal.
 ```python
 pipenv shell
 ```
-Once that is setup download and unzip this whole git repository in to your folder.\
-If you closed your terminal or virtual environment, navigate back to the folder and start up the virtual environment using:
+If you closed your terminal or virtual environment, navigate back to the folder again and start up the virtual environment using:
 ```python
 pipenv shell
 ```
@@ -28,7 +27,6 @@ pipenv install -r requirements.txt
 ```
 
 ### No virtual environment
-Download and unzip this whole git repository in to your folder.\
 Navigate to the folder you created in the terminal and enter the following line:
 ```python
 pip install -r requirements.txt
