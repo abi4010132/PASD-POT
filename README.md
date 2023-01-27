@@ -1,6 +1,6 @@
 # Problem Analysis and Software Design Proof of Technology
-This is the proof of technology for the minimum viable product of group 19
-#### Emmanouil Kalostypis, Antonis Charalambous & Abi Raveenthiran
+This is the proof of technology for the minimum viable product made by group 19
+#### Group 19: Emmanouil Kalostypis, Antonis Charalambous & Abi Raveenthiran
 
 ## Installation 
 Download and unzip the main branch of this repository.\
