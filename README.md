@@ -1,5 +1,5 @@
 # Problem Analysis and Software Design Proof of Technology Group 19
-### Emmanouil Kalostypis, Antonis Charalambous & Abi Raveenthiran
+#### Emmanouil Kalostypis, Antonis Charalambous & Abi Raveenthiran
 
 ## Installation instructions
 Create a new folder where u will store this project in.
@@ -28,6 +28,7 @@ pipenv install -r requirements.txt
 ```
 
 ### No virtual environment
+Download and unzip this whole git repository in to your folder
 Navigate to the folder you created in the terminal and enter the following line:
 ```python
 pip install -r requirements.txt
